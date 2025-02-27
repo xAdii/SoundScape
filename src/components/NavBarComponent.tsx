@@ -27,6 +27,9 @@ const NavBarComponent: React.FC = () => {
             <Nav.Link as={Link} to="/charts-trends">
               Charts & Trends
             </Nav.Link>
+            <Nav.Link as={Link} to="/profile">
+              Profile
+            </Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

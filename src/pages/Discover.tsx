@@ -9,7 +9,7 @@ const Discover: React.FC = () => {
 
   return (
     <Container className="mt-4">
-      <div className="display-4">Discover Music</div>
+      <div className="display-4 text-center">Discover Music</div>
       <Row className="my-4">
         <Col md={3}>
           <CardComponent

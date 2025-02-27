@@ -8,7 +8,7 @@ const ChartsTrends: React.FC = () => {
 
   return (
     <Container className="mt-4">
-      <div className="display-4">Charts & Trends</div>
+      <div className="display-4 text-center">Charts & Trends</div>
     </Container>
   );
 };
