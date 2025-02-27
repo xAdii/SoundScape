@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { Container } from "react-bootstrap";
 
-const Home: React.FC = () => {
+const ChartsTrends: React.FC = () => {
   useEffect(() => {
-    document.title = "SoundScape - Home";
+    document.title = "SoundScape - Charts & Trends";
   }, []);
 
   return (
     <Container className="mt-4">
-      <div className="display-4">Home</div>
+      <div className="display-4">Charts & Trends</div>
     </Container>
   );
 };
 
-export default Home;
+export default ChartsTrends;

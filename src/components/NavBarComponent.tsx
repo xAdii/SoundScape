@@ -1,12 +1,13 @@
+import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
 
-function NavBar() {
+const NavBarComponent: React.FC = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand as={Link} to="/">
           <img
-            alt=""
+            alt="SoundScape Logo"
             src="favicon.ico"
             width="30"
             height="30"
@@ -17,13 +18,20 @@ function NavBar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#playlists">Playlists</Nav.Link>
+            <Nav.Link as={Link} to="/">
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/discover">
+              Discover Music
+            </Nav.Link>
+            <Nav.Link as={Link} to="/charts-trends">
+              Charts & Trends
+            </Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
               type="search"
-              placeholder="Browse Playlists..."
+              placeholder="Browse Songs..."
               className="me-2"
               aria-label="Search"
             />
@@ -33,6 +41,6 @@ function NavBar() {
       </Container>
     </Navbar>
   );
-}
+};
 
-export default NavBar;
+export default NavBarComponent;
