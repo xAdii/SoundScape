@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import NavBar from "../components/NavBar.js";
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -6,10 +7,8 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="container">
-      <h1>Welcome to Soundscape</h1>
-      <p>Your go-to platform for discovering music!</p>
-      {/* Here, you can add components to display music recommendations */}
+    <div>
+      <NavBar />
     </div>
   );
 };
