@@ -1,17 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './assets/styles/global.css';
-import Home from './pages/Home';
-import Discover from './pages/Discover';
-import ChartsTrends from './pages/ChartsTrends';
-import Profile from './pages/Profile';
-import NavBarComponent from './components/NavBarComponent';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import "./assets/styles/global.css";
+import Home from "./pages/Home";
+import Discover from "./pages/Discover";
+import ChartsTrends from "./pages/ChartsTrends";
+import Profile from "./pages/Profile";
+import NavBarComponent from "./components/NavBarComponent";
 
 const App: React.FC = () => {
   return (
     <Router>
-      <NavBarComponent />
       <div className="App">
+        <NavBarComponent />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/discover" element={<Discover />} />
