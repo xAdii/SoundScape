@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "../assets/styles/home.css"
+import "../assets/styles/home.css";
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -35,6 +35,8 @@ const Home: React.FC = () => {
             you. Whether you're a casual listener or a music enthusiast, there's
             something here for everyone.
           </p>
+          <Link to="/register"><Button variant="success">Create a new Account</Button></Link>
+          
         </div>
         <div className="intro-image">
           <img src="/images/intro.jpg" alt="Experience Music" />
