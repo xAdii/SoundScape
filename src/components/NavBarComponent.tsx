@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
 
-const NavBarComponent: React.FC = () => {
+const NavBarComponent = () => {
   return (
     <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
       <Container>
