@@ -16,6 +16,10 @@ const Profile: React.FC = () => {
   return (
     <Container className="mt-4">
       <div className="display-4 text-center">Profile</div>
+      <div className="mt-4 text-center">
+        <Button variant="primary">Register</Button>
+        <Button variant="outline-primary">Login</Button>
+      </div>
       <Dropdown className="mt-4">
         <Dropdown.Toggle variant="success" id="dropdown-basic">
           Upload...
