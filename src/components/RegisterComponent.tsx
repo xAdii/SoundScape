@@ -20,13 +20,26 @@ const RegisterComponent = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     const form = e.currentTarget;
+
     if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
       setSubmitted(true);
+
+      const response = await fetch("http://localhost:5000/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        alert(`Registered! Your profile ID is ${data.id}`);
+      }
     }
     setValidated(true);
   };
