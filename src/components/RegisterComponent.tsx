@@ -3,7 +3,7 @@ import { Form, Button, Container, Alert } from "react-bootstrap";
 
 const RegisterComponent = () => {
   const [formData, setFormData] = useState({
-    username: "",
+    name: "",
     email: "",
     password: "",
     agreeToMusic: false,
@@ -58,8 +58,8 @@ const RegisterComponent = () => {
             required
             type="text"
             placeholder="Enter username"
-            name="username"
-            value={formData.username}
+            name="name"
+            value={formData.name}
             onChange={handleChange}
           />
           <Form.Control.Feedback type="invalid">

@@ -1,9 +1,14 @@
-import { Button, Container, Dropdown } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useUser } from "../context/UserContext";
 
 const ProfileComponent = () => {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
+
+  const handleLogout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+  };
 
   if (!user)
     return (
@@ -24,15 +29,12 @@ const ProfileComponent = () => {
 
   return (
     <Container>
-      <Dropdown className="mt-4">
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          Upload...
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <Dropdown.Item>Song</Dropdown.Item>
-          <Dropdown.Item>Playlist</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+      <div className="text-center">
+        <div className="mt-4 display-6">Welcome back {user.name}!</div>
+      </div>
+      <Container>
+        <Button variant="danger" onClick={handleLogout}>Logout</Button>
+      </Container>
     </Container>
   );
 };
