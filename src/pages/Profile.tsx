@@ -7,6 +7,7 @@ import {
   Tab,
   ListGroup,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Profile: React.FC = () => {
   useEffect(() => {
@@ -17,8 +18,12 @@ const Profile: React.FC = () => {
     <Container className="mt-4">
       <div className="display-4 text-center">Profile</div>
       <div className="mt-4 text-center">
-        <Button variant="primary">Register</Button>
+        <Link to="/register">
+          <Button className="m-8" variant="primary">Register</Button>
+        </Link>
+        <Link to="/login">
         <Button variant="outline-primary">Login</Button>
+        </Link>
       </div>
       <Dropdown className="mt-4">
         <Dropdown.Toggle variant="success" id="dropdown-basic">

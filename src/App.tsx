@@ -6,6 +6,7 @@ import Discover from "./pages/Discover";
 import ChartsTrends from "./pages/ChartsTrends";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 import NavBarComponent from "./components/NavBarComponent";
 
 const App: React.FC = () => {
@@ -19,6 +20,7 @@ const App: React.FC = () => {
           <Route path="/charts-trends" element={<ChartsTrends />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>
