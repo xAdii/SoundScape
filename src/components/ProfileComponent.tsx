@@ -1,13 +1,13 @@
-import { useState } from "react";
 import { Button, Container, Dropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useUser } from "../context/UserContext";
 
 const ProfileComponent = () => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { user } = useUser();
 
-  return (
-    <Container>
-      {!loggedIn && (
+  if (!user)
+    return (
+      <Container>
         <div className="text-center">
           <div className="mt-4 display-6">You are currently not logged in.</div>
           <div className="mt-4">
@@ -19,18 +19,20 @@ const ProfileComponent = () => {
             </Link>
           </div>
         </div>
-      )}
-      {loggedIn && (
-        <Dropdown className="mt-4">
-          <Dropdown.Toggle variant="success" id="dropdown-basic">
-            Upload...
-          </Dropdown.Toggle>
-          <Dropdown.Menu>
-            <Dropdown.Item>Song</Dropdown.Item>
-            <Dropdown.Item>Playlist</Dropdown.Item>
-          </Dropdown.Menu>
-        </Dropdown>
-      )}
+      </Container>
+    );
+
+  return (
+    <Container>
+      <Dropdown className="mt-4">
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          Upload...
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item>Song</Dropdown.Item>
+          <Dropdown.Item>Playlist</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     </Container>
   );
 };

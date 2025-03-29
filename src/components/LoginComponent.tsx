@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
+import { useUser } from "../context/UserContext";
 
 const LoginComponent = () => {
   const [formData, setFormData] = useState({
@@ -8,8 +9,9 @@ const LoginComponent = () => {
   });
 
   const [validated, setValidated] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
+
+  const { user, setUser } = useUser();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -35,8 +37,13 @@ const LoginComponent = () => {
 
       const data = await response.json();
 
-      setError(!data.success);
-      setSubmitted(data.success);
+      if (data.success) {
+        setUser(data.user);
+        console.log(data);
+        setError(false);
+      } else {
+        setError(true);
+      }
     }
     setValidated(true);
   };
@@ -44,18 +51,11 @@ const LoginComponent = () => {
   return (
     <Container className="mt-5" style={{ maxWidth: "500px" }}>
       <h2 className="text-center mb-5">Login to SoundScape</h2>
-      {submitted && (
-        <Alert variant="success">
-          Welcome! You're now logged in! 🎵
-        </Alert>
+      {user && (
+        <Alert variant="success">Welcome! You're now logged in! 🎵</Alert>
       )}
-      {error && (
-        <Alert variant="danger">
-          No User was found! 🎵
-        </Alert>
-      )}
+      {error && <Alert variant="danger">No User was found! 🎵</Alert>}
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-
         <Form.Group controlId="email" className="mt-3">
           <Form.Label>Email address</Form.Label>
           <Form.Control

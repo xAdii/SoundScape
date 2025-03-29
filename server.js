@@ -47,6 +47,10 @@ app.post("/login", (req, res) => {
     res.status(200).json({
       success: true,
       message: "User logged in successfully!",
+      user: {
+        name: userFound.name,
+        email: userFound.email,
+      },
     });
   } else {
     res.status(401).json({

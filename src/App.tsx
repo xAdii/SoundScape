@@ -8,22 +8,25 @@ import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import NavBarComponent from "./components/NavBarComponent";
+import { UserProvider } from "./context/UserContext";
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <div className="App">
-        <NavBarComponent />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/discover" element={<Discover />} />
-          <Route path="/charts-trends" element={<ChartsTrends />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
-    </Router>
+    <UserProvider>
+      <Router>
+        <div className="App">
+          <NavBarComponent />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/discover" element={<Discover />} />
+            <Route path="/charts-trends" element={<ChartsTrends />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </div>
+      </Router>
+    </UserProvider>
   );
 };
 
