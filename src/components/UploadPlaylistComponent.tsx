@@ -147,16 +147,20 @@ const UploadPlaylistComponent = () => {
         <Form.Group controlId="songs" className="mt-3">
           <Form.Label>Choose Songs for Playlist</Form.Label>
           <div>
-            {uploadedSongs.map((song) => (
-              <Form.Check
-                key={song.id}
-                type="checkbox"
-                label={`"${song.title}" by ${song.artist}`}
-                value={song.id}
-                onChange={handleSongSelection}
-                checked={formData.songs.includes(song.id)}
-              />
-            ))}
+            {uploadedSongs.length === 0 ? (
+              <p>No songs uploaded yet.</p>
+            ) : (
+              uploadedSongs.map((song) => (
+                <Form.Check
+                  key={song.id}
+                  type="checkbox"
+                  label={`"${song.title}" by ${song.artist}`}
+                  value={song.id}
+                  onChange={handleSongSelection}
+                  checked={formData.songs.includes(song.id)}
+                />
+              ))
+            )}
           </div>
           <Form.Control.Feedback type="invalid">
             Please select at least one song.

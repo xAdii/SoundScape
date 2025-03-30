@@ -1,8 +1,9 @@
 {
   "title": "123",
   "genre": "jazz",
-  "artist": "123",
-  "length": "01:00",
+  "songs": [
+    4
+  ],
   "uploadedBy": "dev@dev",
-  "id": 4
+  "id": 6
 }

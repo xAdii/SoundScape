@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 const ProfileComponent = () => {
   const { user, setUser } = useUser();
   const [songs, setSongs] = useState<any[]>([]);
+  const [playlists, setPlaylists] = useState<any[]>([]);
 
   const handleLogout = () => {
     setUser(null);
@@ -20,6 +21,41 @@ const ProfileComponent = () => {
     setSongs((prevSongs) => prevSongs.filter((song) => song.id !== songid));
   };
 
+  const handleDeletePlaylist = async (playlistId: number) => {
+    await fetch(`http://localhost:5000/playlists/${playlistId}`, {
+      method: "DELETE",
+    });
+
+    setPlaylists((prevPlaylists) =>
+      prevPlaylists.filter((playlist) => playlist.id !== playlistId)
+    );
+  };
+
+  const calculatePlaylistLength = (playlistSongs: any[], allSongs: any[]) => {
+    let totalMinutes = 0;
+    let totalSeconds = 0;
+
+    playlistSongs.forEach((songId) => {
+      const song = allSongs.find((s) => s.id === songId);
+
+      const [minutes, seconds] = song.length
+        .split(":")
+        .map((time: string) => parseInt(time, 10));
+
+      totalMinutes += minutes;
+      totalSeconds += seconds;
+    });
+
+    totalMinutes += Math.floor(totalSeconds / 60);
+    totalSeconds = totalSeconds % 60;
+
+    return `${totalMinutes}:${totalSeconds.toString().padStart(2, "0")}`;
+  };
+
+  const countNonDeletedSongs = (playlistSongs: any[]) => {
+    return playlistSongs.filter((song) => !song.deleted).length;
+  };
+
   useEffect(() => {
     const fetchSongs = async () => {
       if (user) {
@@ -31,7 +67,18 @@ const ProfileComponent = () => {
       }
     };
 
+    const fetchPlaylists = async () => {
+      if (user) {
+        const response = await fetch(
+          `http://localhost:5000/users/${user.email}/playlists`
+        );
+        const data = await response.json();
+        setPlaylists(data.playlists || []);
+      }
+    };
+
     fetchSongs();
+    fetchPlaylists();
   }, [user]);
 
   if (!user)
@@ -118,14 +165,35 @@ const ProfileComponent = () => {
                 <th>Genre</th>
                 <th>Songs</th>
                 <th>Length</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td colSpan={5} className="text-center">
-                  You currently have no Playlists to display.
-                </td>
-              </tr>
+              {playlists.length === 0 ? (
+                <tr>
+                  <td colSpan={6} className="text-center">
+                    You currently have no Playlists to display.
+                  </td>
+                </tr>
+              ) : (
+                playlists.map((playlist, index) => (
+                  <tr key={playlist.id}>
+                    <td>{index + 1}</td>
+                    <td>{playlist.title}</td>
+                    <td>{playlist.genre}</td>
+                    <td>{countNonDeletedSongs(playlist.songs)}</td>
+                    <td>{calculatePlaylistLength(playlist.songs, songs)}</td>
+                    <td className="text-center">
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDeletePlaylist(playlist.id)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </Table>
         </Tab>
