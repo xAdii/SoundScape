@@ -13,7 +13,7 @@ const UploadPlaylistComponent = () => {
   const [validated, setValidated] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loginAlert, setLoginAlert] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<string | boolean>(false);
 
   const { user } = useUser();
 
@@ -61,6 +61,12 @@ const UploadPlaylistComponent = () => {
       return;
     }
 
+    if (formData.songs.length === 0) {
+      setError("You need to select at least 1 song!");
+      setValidated(true);
+      return;
+    }
+
     const form = e.currentTarget;
 
     if (form.checkValidity() === false) {
@@ -83,7 +89,7 @@ const UploadPlaylistComponent = () => {
         setError(false);
         setSubmitted(true);
       } else {
-        setError(true);
+        setError("Playlist upload failed. Please try again!");
       }
     }
     setValidated(true);
@@ -97,9 +103,7 @@ const UploadPlaylistComponent = () => {
           Playlist Upload Finished! You can view it on your Profile! 🎶
         </Alert>
       )}
-      {error && (
-        <Alert variant="danger">Error! Playlist upload failed! 🎶</Alert>
-      )}
+      {error && <Alert variant="danger">{error}</Alert>}
       {loginAlert && (
         <Alert
           variant="warning"

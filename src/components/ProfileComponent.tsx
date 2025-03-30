@@ -38,12 +38,14 @@ const ProfileComponent = () => {
     playlistSongs.forEach((songId) => {
       const song = allSongs.find((s) => s.id === songId);
 
-      const [minutes, seconds] = song.length
-        .split(":")
-        .map((time: string) => parseInt(time, 10));
+      if (song && song.length) {
+        const [minutes, seconds] = song.length
+          .split(":")
+          .map((time: string) => parseInt(time, 10));
 
-      totalMinutes += minutes;
-      totalSeconds += seconds;
+        totalMinutes += minutes;
+        totalSeconds += seconds;
+      }
     });
 
     totalMinutes += Math.floor(totalSeconds / 60);
@@ -52,8 +54,11 @@ const ProfileComponent = () => {
     return `${totalMinutes}:${totalSeconds.toString().padStart(2, "0")}`;
   };
 
-  const countNonDeletedSongs = (playlistSongs: any[]) => {
-    return playlistSongs.filter((song) => !song.deleted).length;
+  const countNonDeletedSongs = (playlistSongs: number[], allSongs: any[]) => {
+    return playlistSongs.filter((songId) => {
+      const song = allSongs.find((s) => s.id === songId);
+      return song && !song.deleted;
+    }).length;
   };
 
   useEffect(() => {
@@ -181,7 +186,7 @@ const ProfileComponent = () => {
                     <td>{index + 1}</td>
                     <td>{playlist.title}</td>
                     <td>{playlist.genre}</td>
-                    <td>{countNonDeletedSongs(playlist.songs)}</td>
+                    <td>{countNonDeletedSongs(playlist.songs, songs)}</td>
                     <td>{calculatePlaylistLength(playlist.songs, songs)}</td>
                     <td className="text-center">
                       <Button
