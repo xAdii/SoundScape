@@ -76,6 +76,24 @@ app.post("/upload/song", async (req, res) => {
   });
 });
 
+app.get("/songs/:email", (req, res) => {
+  const userEmail = req.params.email;
+  const songFiles = fs.readdirSync("songs");
+
+  let userSongs = [];
+
+  songFiles.forEach((file) => {
+    const filePath = path.join("songs", file);
+    const songData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+    if (songData.uploadedBy === userEmail) {
+      userSongs.push(songData);
+    }
+  });
+
+  res.status(200).json({ success: true, songs: userSongs });
+});
+
 app.listen(port, () =>
   console.log(`Server running on http://localhost:${port}`)
 );

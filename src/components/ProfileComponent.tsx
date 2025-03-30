@@ -1,14 +1,28 @@
 import { Button, Container, Tab, Table, Tabs } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useUser } from "../context/UserContext";
+import { useEffect, useState } from "react";
 
 const ProfileComponent = () => {
   const { user, setUser } = useUser();
+  const [songs, setSongs] = useState<any[]>([]);
 
   const handleLogout = () => {
     setUser(null);
     localStorage.removeItem("user");
   };
+
+  useEffect(() => {
+    const fetchSongs = async () => {
+      if (user) {
+        const response = await fetch(`http://localhost:5000/songs/${user.email}`);
+        const data = await response.json();
+        setSongs(data.songs || []);
+      }
+    };
+
+    fetchSongs();
+  }, [user]);
 
   if (!user)
     return (
@@ -56,11 +70,23 @@ const ProfileComponent = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td colSpan={5} className="text-center">
-                  You currently have no Songs to display.
-                </td>
-              </tr>
+              {songs.length === 0 ? (
+                <tr>
+                  <td colSpan={5} className="text-center">
+                    You currently have no Songs to display.
+                  </td>
+                </tr>
+              ) : (
+                songs.map((song, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{song.title}</td>
+                    <td>{song.genre}</td>
+                    <td>{song.artist}</td>
+                    <td>{song.length}</td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </Table>
         </Tab>
