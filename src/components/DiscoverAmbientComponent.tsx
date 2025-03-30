@@ -6,7 +6,7 @@ const DiscoverAmbientComponent = () => {
 
   useEffect(() => {
     const fetchSongs = async () => {
-      const response = await fetch(`http://localhost:5000/songs/genre/ambient`);
+      const response = await fetch(`http://localhost:5000/genres/ambient/songs`);
       const data = await response.json();
       setSongs(data.songs || []);
     };

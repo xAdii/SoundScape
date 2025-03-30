@@ -1,46 +1,87 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
 import { useUser } from "../context/UserContext";
 
 const UploadPlaylistComponent = () => {
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    title: "",
+    genre: "",
+    songs: [] as number[],
   });
 
+  const [uploadedSongs, setUploadedSongs] = useState<any[]>([]);
   const [validated, setValidated] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [loginAlert, setLoginAlert] = useState(false);
   const [error, setError] = useState(false);
 
-  const { user, setUser } = useUser();
+  const { user } = useUser();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  useEffect(() => {
+    const fetchUploadedSongs = async () => {
+      if (user) {
+        const response = await fetch(
+          `http://localhost:5000/users/${user.email}/songs`
+        );
+        const data = await response.json();
+        setUploadedSongs(data.songs || []);
+      }
+    };
+
+    fetchUploadedSongs();
+  }, [user]);
+
+  const handleChange = (e: React.ChangeEvent<any>) => {
+    const { name, value } = e.target as HTMLInputElement | HTMLSelectElement;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
   };
 
+  const handleSongSelection = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const songId = parseInt(e.target.value, 10);
+    setFormData((prev) => {
+      const selectedSongs = e.target.checked
+        ? [...prev.songs, songId]
+        : prev.songs.filter((id) => id !== songId);
+
+      return {
+        ...prev,
+        songs: selectedSongs,
+      };
+    });
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    if (!user) {
+      setLoginAlert(true);
+      return;
+    }
 
     const form = e.currentTarget;
 
     if (form.checkValidity() === false) {
       e.stopPropagation();
     } else {
-      const response = await fetch("http://localhost:5000/login", {
+      const playlistData = {
+        ...formData,
+        uploadedBy: user.email,
+      };
+
+      const response = await fetch("http://localhost:5000/upload/playlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(playlistData),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        setUser(data.user);
-        console.log(data);
         setError(false);
+        setSubmitted(true);
       } else {
         setError(true);
       }
@@ -50,44 +91,80 @@ const UploadPlaylistComponent = () => {
 
   return (
     <Container className="mt-5" style={{ maxWidth: "500px" }}>
-      <h2 className="text-center mb-5">Login to SoundScape</h2>
-      {user && (
-        <Alert variant="success">Welcome! You're now logged in! 🎵</Alert>
+      <h2 className="text-center mb-5">Upload a Playlist to Soundscape</h2>
+      {submitted && (
+        <Alert variant="success">
+          Playlist Upload Finished! You can view it on your Profile! 🎶
+        </Alert>
       )}
-      {error && <Alert variant="danger">No User was found! 🎵</Alert>}
+      {error && (
+        <Alert variant="danger">Error! Playlist upload failed! 🎶</Alert>
+      )}
+      {loginAlert && (
+        <Alert
+          variant="warning"
+          onClose={() => setLoginAlert(false)}
+          dismissible
+        >
+          You need to be logged in to upload a playlist!
+        </Alert>
+      )}
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Group controlId="email" className="mt-3">
-          <Form.Label>Email address</Form.Label>
+        <Form.Group controlId="title" className="mt-3">
+          <Form.Label>Playlist Title</Form.Label>
           <Form.Control
             required
-            type="email"
-            placeholder="Enter email"
-            name="email"
-            value={formData.email}
+            type="text"
+            placeholder="Enter title"
+            name="title"
+            value={formData.title}
             onChange={handleChange}
           />
           <Form.Control.Feedback type="invalid">
-            Please enter a valid email.
+            Please provide a playlist title.
           </Form.Control.Feedback>
         </Form.Group>
 
-        <Form.Group controlId="password" className="mt-3">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
+        <Form.Group controlId="genre" className="mt-3">
+          <Form.Label>Genre</Form.Label>
+          <Form.Select
             required
-            type="password"
-            placeholder="Password"
-            name="password"
-            value={formData.password}
+            name="genre"
+            value={formData.genre}
             onChange={handleChange}
-          />
+          >
+            <option value="">Select a genre...</option>
+            <option value="hiphop">Hip-Hop</option>
+            <option value="electronic">Electronic</option>
+            <option value="jazz">Jazz</option>
+            <option value="ambient">Ambient</option>
+          </Form.Select>
           <Form.Control.Feedback type="invalid">
-            Please enter a password.
+            Please select a genre.
+          </Form.Control.Feedback>
+        </Form.Group>
+
+        <Form.Group controlId="songs" className="mt-3">
+          <Form.Label>Choose Songs for Playlist</Form.Label>
+          <div>
+            {uploadedSongs.map((song) => (
+              <Form.Check
+                key={song.id}
+                type="checkbox"
+                label={`"${song.title}" by ${song.artist}`}
+                value={song.id}
+                onChange={handleSongSelection}
+                checked={formData.songs.includes(song.id)}
+              />
+            ))}
+          </div>
+          <Form.Control.Feedback type="invalid">
+            Please select at least one song.
           </Form.Control.Feedback>
         </Form.Group>
 
         <Button variant="primary" type="submit" className="mt-4 w-100">
-          Login
+          Upload Playlist
         </Button>
       </Form>
     </Container>

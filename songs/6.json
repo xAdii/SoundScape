@@ -3,5 +3,6 @@
   "genre": "hiphop",
   "artist": "123",
   "length": "234",
-  "uploadedBy": "test@test"
+  "uploadedBy": "test@test",
+  "id": 6
 }

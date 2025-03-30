@@ -145,7 +145,7 @@ const UploadSongComponent = () => {
         </Form.Group>
 
         <Button variant="primary" type="submit" className="mt-4 w-100">
-          Login
+          Upload Song
         </Button>
       </Form>
     </Container>

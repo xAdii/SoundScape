@@ -6,7 +6,7 @@ const DiscoverElectronicComponent = () => {
 
   useEffect(() => {
     const fetchSongs = async () => {
-      const response = await fetch(`http://localhost:5000/songs/genre/electronic`);
+      const response = await fetch(`http://localhost:5000/genres/electronic/songs`);
       const data = await response.json();
       setSongs(data.songs || []);
     };

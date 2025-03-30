@@ -6,7 +6,7 @@ const DiscoverHiphopComponent = () => {
 
   useEffect(() => {
     const fetchSongs = async () => {
-      const response = await fetch(`http://localhost:5000/songs/genre/hiphop`);
+      const response = await fetch(`http://localhost:5000/genres/hiphop/songs`);
       const data = await response.json();
       setSongs(data.songs || []);
     };

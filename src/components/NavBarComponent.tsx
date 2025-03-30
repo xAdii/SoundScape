@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
-import { Container, Nav, Navbar, Form, Button } from "react-bootstrap";
+import { Button, Container, Nav, Navbar } from "react-bootstrap";
 
 const NavBarComponent = () => {
   return (
-    <Navbar fixed="top" expand="lg" className="bg-body-tertiary" data-bs-theme="dark">
+    <Navbar
+      fixed="top"
+      expand="lg"
+      className="bg-body-tertiary"
+      data-bs-theme="dark"
+    >
       <Container>
         <Navbar.Brand as={Link} to="/">
           <img
@@ -27,19 +32,12 @@ const NavBarComponent = () => {
             <Nav.Link as={Link} to="/charts-trends">
               Charts & Trends
             </Nav.Link>
+          </Nav>
+          <Nav className="ms-auto">
             <Nav.Link as={Link} to="/profile">
-              Profile
+              <Button variant="outline-success">Profile</Button>
             </Nav.Link>
           </Nav>
-          <Form className="d-flex">
-            <Form.Control
-              type="search"
-              placeholder="Browse Songs..."
-              className="me-2"
-              aria-label="Search"
-            />
-            <Button variant="outline-success">Search</Button>
-          </Form>
         </Navbar.Collapse>
       </Container>
     </Navbar>

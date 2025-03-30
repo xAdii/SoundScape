@@ -3,5 +3,6 @@
   "genre": "jazz",
   "artist": "123",
   "length": "123",
-  "uploadedBy": "test@test"
+  "uploadedBy": "test@test",
+  "id": 5
 }

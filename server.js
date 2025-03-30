@@ -67,7 +67,12 @@ app.post("/upload/song", async (req, res) => {
   const newId = files.length + 1;
   const filePath = `songs/${newId}.json`;
 
-  fs.writeFileSync(filePath, JSON.stringify(song, null, 2));
+  const songData = {
+    ...song,
+    id: newId,
+  };
+
+  fs.writeFileSync(filePath, JSON.stringify(songData, null, 2));
 
   res.status(201).json({
     success: true,
@@ -76,7 +81,7 @@ app.post("/upload/song", async (req, res) => {
   });
 });
 
-app.get("/songs/user/:email", (req, res) => {
+app.get("/users/:email/songs", (req, res) => {
   const userEmail = req.params.email;
   const songFiles = fs.readdirSync("songs");
 
@@ -86,6 +91,8 @@ app.get("/songs/user/:email", (req, res) => {
     const filePath = path.join("songs", file);
     const songData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
 
+    if (songData.deleted) return;
+
     if (songData.uploadedBy === userEmail) {
       userSongs.push(songData);
     }
@@ -94,7 +101,7 @@ app.get("/songs/user/:email", (req, res) => {
   res.status(200).json({ success: true, songs: userSongs });
 });
 
-app.get("/songs/genre/:genre", (req, res) => {
+app.get("/genres/:genre/songs", (req, res) => {
   const genre = req.params.genre;
   const songFiles = fs.readdirSync("songs");
 
@@ -110,6 +117,14 @@ app.get("/songs/genre/:genre", (req, res) => {
   });
 
   res.status(200).json({ success: true, songs: filteredSongs });
+});
+
+app.delete("/songs/:songid", (req, res) => {
+  const { songid } = req.params;
+  const filePath = `songs/${songid}.json`;
+
+  fs.writeFileSync(filePath, JSON.stringify({ deleted: true }), "utf-8");
+  res.json({ success: true, message: "Song marked as deleted" });
 });
 
 app.listen(port, () =>

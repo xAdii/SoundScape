@@ -12,10 +12,20 @@ const ProfileComponent = () => {
     localStorage.removeItem("user");
   };
 
+  const handleDelete = async (songid: number) => {
+    await fetch(`http://localhost:5000/songs/${songid}`, {
+      method: "DELETE",
+    });
+
+    setSongs((prevSongs) => prevSongs.filter((song) => song.id !== songid));
+  };
+
   useEffect(() => {
     const fetchSongs = async () => {
       if (user) {
-        const response = await fetch(`http://localhost:5000/songs/user/${user.email}`);
+        const response = await fetch(
+          `http://localhost:5000/users/${user.email}/songs`
+        );
         const data = await response.json();
         setSongs(data.songs || []);
       }
@@ -67,12 +77,13 @@ const ProfileComponent = () => {
                 <th>Genre</th>
                 <th>Artist</th>
                 <th>Length</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
               {songs.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="text-center">
+                  <td colSpan={6} className="text-center">
                     You currently have no Songs to display.
                   </td>
                 </tr>
@@ -84,6 +95,14 @@ const ProfileComponent = () => {
                     <td>{song.genre}</td>
                     <td>{song.artist}</td>
                     <td>{song.length}</td>
+                    <td className="text-center">
+                      <Button
+                        variant="danger"
+                        onClick={() => handleDelete(song.id)}
+                      >
+                        Delete
+                      </Button>
+                    </td>
                   </tr>
                 ))
               )}
