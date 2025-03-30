@@ -1,46 +1,64 @@
-# Getting Started with Create React App
+# Projektstart: SoundScape
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Dieses Projekt wurde mit [Create React App](https://github.com/facebook/create-react-app) erstellt.
 
-## Available Scripts
+## Voraussetzungen
 
-In the project directory, you can run:
+Stellen Sie sicher, dass **Node.js** und **npm** auf Ihrem System installiert sind. Falls nicht, können Sie Node.js [hier herunterladen](https://nodejs.org/).
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Nach dem Klonen des Repositories müssen die **dependencies** installiert werden. Führen Sie dazu im Projektverzeichnis folgenden Befehl aus:
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```bash
+npm install
+```
 
-### `npm test`
+## Starten des Projektes
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Das Projekt besteht aus einer React-Frontend-Anwendung und einem Node.js-Backend. Beide müssen separat gestartet werden.
 
-### `npm run build`
+### 1️⃣ React-Frontend starten
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Im Hauptverzeichnis des Projekts folgenden Befehl ausführen:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm start
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Die Anwendung wird im Entwicklungsmodus gestartet. Sie ist unter http://localhost:3000 erreichbar. Änderungen am Code werden automatisch übernommen.
 
-### `npm run eject`
+### 2️⃣ Backend-Server starten
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Der Backend-Server wird mit folgendem Befehl gestartet:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+node server.js
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Dadurch wird der Server unter http://localhost:5000 ausgeführt und kann API-Anfragen verarbeiten.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Weitere nützliche Befehle
 
-## Learn More
+```bash
+npm test
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Startet den Testmodus.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+npm run build
+```
+
+Erstellt eine Produktionsversion der Anwendung im build-Ordner.
+
+```bash
+npm run eject
+```
+
+Achtung: Dies entfernt die Standardkonfiguration und gibt vollständige Kontrolle über die Build-Tools.
+
+## Weitere Informationen
+
+- [Create React App Dokumentation](https://facebook.github.io/create-react-app/docs/getting-started)
+- [React Dokumentation](https://reactjs.org/)
