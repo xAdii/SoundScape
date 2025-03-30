@@ -17,6 +17,7 @@ const Discover: React.FC = () => {
             title="Hip-Hop"
             text="Explore the world of Hip-Hop, where powerful beats and lyrical storytelling come together."
             button="Listen Now"
+            link="/discover/hiphop"
           />
         </Col>
         <Col md={3}>
@@ -25,6 +26,7 @@ const Discover: React.FC = () => {
             title="Electronic"
             text="Immerse yourself in the pulse of Electronic music, featuring deep bass and mesmerizing synths."
             button="Listen Now"
+            link="/discover/electronic"
           />
         </Col>
         <Col md={3}>
@@ -33,6 +35,7 @@ const Discover: React.FC = () => {
             title="Jazz"
             text="Experience a genre filled with improvisation, soulful melodies, and rich instrumentation."
             button="Listen Now"
+            link="/discover/jazz"
           />
         </Col>
         <Col md={3}>
@@ -41,6 +44,7 @@ const Discover: React.FC = () => {
             title="Ambient"
             text="Filled with atmospheric soundscapes, calming tones, and a focus on mood and texture."
             button="Listen Now"
+            link="/discover/ambient"
           />
         </Col>
       </Row>

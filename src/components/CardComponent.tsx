@@ -1,11 +1,13 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 interface CardProps {
   image: string;
   title: string;
   text: string;
   button: string;
+  link: string;
 }
 
 const CardComponent: React.FC<CardProps> = (CardProps) => {
@@ -15,7 +17,9 @@ const CardComponent: React.FC<CardProps> = (CardProps) => {
       <Card.Body>
         <Card.Title>{CardProps.title}</Card.Title>
         <Card.Text>{CardProps.text}</Card.Text>
-        <Button variant="primary">{CardProps.button}</Button>
+        <Link to={CardProps.link}>
+          <Button variant="primary">{CardProps.button}</Button>
+        </Link>
       </Card.Body>
     </Card>
   );

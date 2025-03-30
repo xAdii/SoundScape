@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./assets/styles/global.css";
 import Home from "./pages/Home";
 import Discover from "./pages/Discover";
+import DiscoverHiphop from "./pages/discover/Hiphop";
+import DiscoverElectronic from "./pages/discover/Electronic";
+import DiscoverJazz from "./pages/discover/Jazz";
+import DiscoverAmbient from "./pages/discover/Ambient";
 import ChartsTrends from "./pages/ChartsTrends";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
@@ -21,6 +25,10 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/discover" element={<Discover />} />
+            <Route path="/discover/hiphop" element={<DiscoverHiphop />} />
+            <Route path="/discover/electronic" element={<DiscoverElectronic />} />
+            <Route path="/discover/jazz" element={<DiscoverJazz />} />
+            <Route path="/discover/ambient" element={<DiscoverAmbient />} />
             <Route path="/charts-trends" element={<ChartsTrends />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/register" element={<Register />} />

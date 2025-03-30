@@ -10,7 +10,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="home">
-      <div className="hero-section bg-dark text-white text-center">
+      <div className="hero-section bg-dark text-white text-center home">
         <Container>
           <Row className="justify-content-center">
             <Col>

@@ -76,7 +76,7 @@ app.post("/upload/song", async (req, res) => {
   });
 });
 
-app.get("/songs/:email", (req, res) => {
+app.get("/songs/user/:email", (req, res) => {
   const userEmail = req.params.email;
   const songFiles = fs.readdirSync("songs");
 
@@ -92,6 +92,24 @@ app.get("/songs/:email", (req, res) => {
   });
 
   res.status(200).json({ success: true, songs: userSongs });
+});
+
+app.get("/songs/genre/:genre", (req, res) => {
+  const genre = req.params.genre;
+  const songFiles = fs.readdirSync("songs");
+
+  let filteredSongs = [];
+
+  songFiles.forEach((file) => {
+    const filePath = path.join("songs", file);
+    const songData = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+
+    if (songData.genre === genre) {
+      filteredSongs.push(songData);
+    }
+  });
+
+  res.status(200).json({ success: true, songs: filteredSongs });
 });
 
 app.listen(port, () =>

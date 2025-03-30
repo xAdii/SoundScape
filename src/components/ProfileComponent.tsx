@@ -15,7 +15,7 @@ const ProfileComponent = () => {
   useEffect(() => {
     const fetchSongs = async () => {
       if (user) {
-        const response = await fetch(`http://localhost:5000/songs/${user.email}`);
+        const response = await fetch(`http://localhost:5000/songs/user/${user.email}`);
         const data = await response.json();
         setSongs(data.songs || []);
       }

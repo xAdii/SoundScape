@@ -2,3 +2,43 @@ body {
   background-color: #e5e5e5;
   padding-top: 56px;
 }
+
+.hero-section.home {
+  background: url("/public/images/hero.jpg") center/cover no-repeat;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-section.ambient {
+  background: url("/public/images/ambient.png") center/cover no-repeat;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-section.electronic {
+  background: url("/public/images/electronic.png") center/cover no-repeat;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-section.hiphop {
+  background: url("/public/images/hiphop.png") center/cover no-repeat;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-section.jazz {
+  background: url("/public/images/jazz.png") center/cover no-repeat;
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

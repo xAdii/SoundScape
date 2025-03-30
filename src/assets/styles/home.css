@@ -1,11 +1,3 @@
-.hero-section {
-  background: url("/public/images/hero.jpg") center/cover no-repeat;
-  min-height: 60vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 .intro-section {
   display: flex;
   align-items: center;
