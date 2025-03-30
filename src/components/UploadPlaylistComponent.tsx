@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
 import { useUser } from "../context/UserContext";
 
-const LoginComponent = () => {
+const UploadPlaylistComponent = () => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -39,6 +39,7 @@ const LoginComponent = () => {
 
       if (data.success) {
         setUser(data.user);
+        console.log(data);
         setError(false);
       } else {
         setError(true);
@@ -93,4 +94,4 @@ const LoginComponent = () => {
   );
 };
 
-export default LoginComponent;
+export default UploadPlaylistComponent;

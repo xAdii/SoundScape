@@ -7,6 +7,8 @@ import ChartsTrends from "./pages/ChartsTrends";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import UploadSong from "./pages/upload/Song";
+import UploadPlaylist from "./pages/upload/Playlist";
 import NavBarComponent from "./components/NavBarComponent";
 import { UserProvider } from "./context/UserContext";
 
@@ -23,6 +25,8 @@ const App: React.FC = () => {
             <Route path="/profile" element={<Profile />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/upload/song" element={<UploadSong />} />
+            <Route path="/upload/playlist" element={<UploadPlaylist />} />
           </Routes>
         </div>
       </Router>

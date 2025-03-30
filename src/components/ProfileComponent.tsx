@@ -32,12 +32,17 @@ const ProfileComponent = () => {
       <div className="text-center mt-4 display-6">
         Welcome back {user.name}!
       </div>
-      <Button variant="success" className="mt-5">
-        Upload a Song
-      </Button>
-      <Button variant="success" className="mt-5 mx-2">
-        Create a Playlists
-      </Button>
+      <Link to="/upload/song">
+        <Button variant="success" className="mt-5">
+          Upload a Song
+        </Button>
+      </Link>
+      <Link to="/upload/playlist">
+        <Button variant="success" className="mt-5 mx-2">
+          Create a Playlists
+        </Button>
+      </Link>
+
       <Tabs defaultActiveKey="songs" className="mt-3" fill>
         <Tab eventKey="songs" title="Songs">
           <Table striped bordered hover>
@@ -45,7 +50,7 @@ const ProfileComponent = () => {
               <tr>
                 <th>#</th>
                 <th>Title</th>
-                <th>Category</th>
+                <th>Genre</th>
                 <th>Artist</th>
                 <th>Length</th>
               </tr>
@@ -65,7 +70,7 @@ const ProfileComponent = () => {
               <tr>
                 <th>#</th>
                 <th>Title</th>
-                <th>Category</th>
+                <th>Genre</th>
                 <th>Songs</th>
                 <th>Length</th>
               </tr>

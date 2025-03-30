@@ -60,6 +60,22 @@ app.post("/login", (req, res) => {
   }
 });
 
+app.post("/upload/song", async (req, res) => {
+  const song = req.body;
+
+  const files = fs.readdirSync("songs");
+  const newId = files.length + 1;
+  const filePath = `songs/${newId}.json`;
+
+  fs.writeFileSync(filePath, JSON.stringify(song, null, 2));
+
+  res.status(201).json({
+    success: true,
+    message: "Song uploaded successfully!",
+    song: song,
+  });
+});
+
 app.listen(port, () =>
   console.log(`Server running on http://localhost:${port}`)
 );
