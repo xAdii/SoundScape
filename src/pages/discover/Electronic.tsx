@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const DiscoverElectronic: React.FC = () => {
   useEffect(() => {
-    document.title = "SoundScape - Discover Ambient";
+    document.title = "SoundScape - Discover Electronic";
   }, []);
 
   return (

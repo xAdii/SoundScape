@@ -12,7 +12,7 @@ body {
 }
 
 .hero-section.ambient {
-  background: url("/public/images/ambient.png") center/cover no-repeat;
+  background: url("/public/images/heroAmbient.jpg") center/cover no-repeat;
   min-height: 60vh;
   display: flex;
   align-items: center;
@@ -20,7 +20,7 @@ body {
 }
 
 .hero-section.electronic {
-  background: url("/public/images/electronic.png") center/cover no-repeat;
+  background: url("/public/images/heroElectronic.jpg") center/cover no-repeat;
   min-height: 60vh;
   display: flex;
   align-items: center;
@@ -28,7 +28,7 @@ body {
 }
 
 .hero-section.hiphop {
-  background: url("/public/images/hiphop.png") center/cover no-repeat;
+  background: url("/public/images/heroHiphop.jpg") center/cover no-repeat;
   min-height: 60vh;
   display: flex;
   align-items: center;
@@ -36,7 +36,7 @@ body {
 }
 
 .hero-section.jazz {
-  background: url("/public/images/jazz.png") center/cover no-repeat;
+  background: url("/public/images/heroJazz.jpg") center/cover no-repeat;
   min-height: 60vh;
   display: flex;
   align-items: center;

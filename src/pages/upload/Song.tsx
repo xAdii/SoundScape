@@ -3,7 +3,7 @@ import UploadSongComponent from "../../components/UploadSongComponent";
 
 const UploadSong: React.FC = () => {
   useEffect(() => {
-    document.title = "SoundScape - Upload Playlist";
+    document.title = "SoundScape - Upload Song";
   }, []);
 
   return <UploadSongComponent />
