@@ -29,8 +29,8 @@ const NavBarComponent = () => {
             <Nav.Link as={Link} to="/discover">
               Discover Music
             </Nav.Link>
-            <Nav.Link as={Link} to="/charts-trends">
-              Charts & Trends
+            <Nav.Link as={Link} to="/musicofwords">
+              The Music of Words
             </Nav.Link>
           </Nav>
           <Nav className="ms-auto">

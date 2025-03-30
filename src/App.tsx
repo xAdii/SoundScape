@@ -7,7 +7,7 @@ import DiscoverHiphop from "./pages/discover/Hiphop";
 import DiscoverElectronic from "./pages/discover/Electronic";
 import DiscoverJazz from "./pages/discover/Jazz";
 import DiscoverAmbient from "./pages/discover/Ambient";
-import ChartsTrends from "./pages/ChartsTrends";
+import MusicOfWords from "./pages/MusicOfWords";
 import Profile from "./pages/Profile";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
@@ -29,7 +29,7 @@ const App: React.FC = () => {
             <Route path="/discover/electronic" element={<DiscoverElectronic />} />
             <Route path="/discover/jazz" element={<DiscoverJazz />} />
             <Route path="/discover/ambient" element={<DiscoverAmbient />} />
-            <Route path="/charts-trends" element={<ChartsTrends />} />
+            <Route path="/musicofwords" element={<MusicOfWords />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
